@@ -246,7 +246,21 @@ try {
   check("…and its statistics are computed: height mean is 171.0000", ownMean === "171.0000", String(ownMean));
 
   /* 9 · the cookie gate opened, because a fresh profile has said nothing yet */
-  check("the cookie panel opened on a first visit", (await count("#consentBar .consentAsk")) === 1);
+  /* 🔴 THE OWNER'S OWN NETWORK GETS A STUB. Caddy serves a two-line `consent.js` to George's
+   * address range so his visits are never counted (the `no-ga-for-me` snippet), and that stub does
+   * not draw the panel. Reporting that as a fault would mean the check fails on the one machine it
+   * was written on — measured on the first live run, 29 October 2026. So the check reads which
+   * consent file the host actually served, and asserts the right outcome for each. */
+  const consentSrc = await evaluate(`fetch("/consent.js", { cache: "no-store" }).then((r) => r.text())`);
+  const stubbed = /analytics suppressed/i.test(consentSrc);
+  const panel = await count("#consentBar .consentAsk");
+  check(
+    stubbed
+      ? "the owner's network is served the analytics stub, and no panel is drawn (correct)"
+      : "the cookie panel opened on a first visit",
+    stubbed ? panel === 0 : panel === 1,
+    stubbed ? `stub served but ${panel} panels drawn` : `no panel on a first visit`,
+  );
 
   /* 10 · the handset width — a page that scrolls sideways on a phone is a fault no desktop check sees */
   await cdp.send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }, session);

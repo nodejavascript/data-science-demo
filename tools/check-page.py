@@ -46,8 +46,16 @@ def check(name: str, ok: bool, detail: str = "") -> None:
         failures.append(name)
 
 
+# 🔴 A BROWSER USER-AGENT, BECAUSE CLOUDFLARE ANSWERS BARE PYTHON WITH 403. Measured on the first
+# live run of this check, 29 October 2026: the same URL that answers 200 to curl and to Chrome
+# answered `HTTP 403 Forbidden` to urllib's default agent, and the check reported the site as
+# broken. A check that cannot read the live host cannot check it.
+UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36"
+
+
 def get(url: str) -> tuple[int, str]:
-    with urllib.request.urlopen(url, timeout=10) as r:
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
+    with urllib.request.urlopen(req, timeout=15) as r:
         return r.status, r.read().decode("utf-8", "replace")
 
 
