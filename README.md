@@ -44,12 +44,14 @@ real browser:
 The last two need the site being served (`python3 tools/serve.py 8161 &`).
 
 ```bash
-node tools/test-stats.mjs         # 89 assertions against Python/scipy-computed values
-node tools/test-consent.mjs       # the real consent.js in a stub DOM, every path
-python3 tools/check-page.py       # the served page against the family's on-page rules
-node tools/verify-render.mjs      # headless Chrome: does the page draw real numbers?
+npm test                   # 89 assertions, the cookie gate, and the served page
+npm run test:e2e           # headless Chrome: does the page draw real numbers?
 node tools/verify-render.mjs --selftest   # …and can that check actually fail?
+npm run test:live          # the DEPLOYED host: files, headers, data, sitemap, identity
 ```
+
+`npm run test:live` is the one that proves a deploy happened — a stale document root, an edge
+holding an old shell or a sitemap naming the old host all look perfect from the repository.
 
 **The expected values in `tools/test-stats.mjs` were computed somewhere else** — in Python, with
 `statistics` and `scipy.stats`, and against the four-decimal summary of Anscombe's quartet that

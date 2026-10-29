@@ -8,8 +8,9 @@
   "scripts": {
     "serve": "python3 tools/serve.py 8161",
     "test": "node tools/test-stats.mjs && node tools/test-consent.mjs && python3 tools/check-page.py",
-    "test:render": "node tools/verify-render.mjs && node tools/verify-render.mjs --selftest",
-    "test:all": "npm test && npm run test:render",
-    "icons": "python3 tools/make_icons.py"
+    "test:all": "npm test && npm run test:e2e && npm run test:live",
+    "icons": "python3 tools/make_icons.py",
+    "test:e2e": "node tools/verify-render.mjs",
+    "test:live": "node tools/live-check.mjs"
   }
 }
