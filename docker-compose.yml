@@ -1,0 +1,9 @@
+# Run the page in your own compose stack. Nothing here needs a device, a secret or a volume — the
+# site is static and every statistic is computed in the visitor's browser.
+services:
+  measured:
+    build: .
+    container_name: measured
+    ports:
+      - "${MEASURED_PORT:-8161}:80"
+    restart: unless-stopped

@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>measured.nodejavascript.com</title>
+    <meta
+      name="description"
+      content="A statistics workbench in one page: real datasets, every figure computed in front of you, every assumption named, every estimate printed with its uncertainty."
+    />
+    <link rel="canonical" href="https://measured.nodejavascript.com/" />
+    <meta name="theme-color" content="#14b8a6" />
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="icon" type="image/png" sizes="180x180" href="/favicon-180.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="measured.nodejavascript.com" />
+    <meta property="og:title" content="A number you cannot check is an opinion" />
+    <meta
+      property="og:description"
+      content="Real datasets, real arithmetic. Every statistic on this page is computed in your browser from the data it names, and printed with the convention it used."
+    />
+    <meta property="og:url" content="https://measured.nodejavascript.com/" />
+    <meta property="og:image" content="https://measured.nodejavascript.com/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="A number you cannot check is an opinion" />
+    <meta
+      name="twitter:description"
+      content="Real datasets, real arithmetic, and every estimate printed with the uncertainty it carries."
+    />
+    <meta name="twitter:image" content="https://measured.nodejavascript.com/img/og.png" />
+
+    <link rel="stylesheet" href="./styles.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Measured",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Any browser",
+            "description": "A statistics workbench: descriptive statistics, histograms, ordinary least squares with standard errors, repeated k-fold cross-validation, and k-nearest-neighbour classification with a confusion matrix and a ROC curve — all computed in the browser from cited datasets.",
+            "url": "https://measured.nodejavascript.com/",
+            "codeRepository": "https://github.com/nodejavascript/measured",
+            "license": "https://opensource.org/license/mit",
+            "isAccessibleForFree": true,
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is this a real statistics package?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is a small one, written from scratch in about 700 lines of plain JavaScript and tested against values computed independently in Python with statistics and scipy. It does descriptive statistics, Pearson and Spearman correlation, ordinary least squares with standard errors and p-values from the t distribution, repeated k-fold cross-validation, k-nearest-neighbour classification, a confusion matrix and the area under the ROC curve. It is deliberately not a substitute for R or SciPy: it does not do multiple regression, mixed models, or anything with a random effect."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does my own CSV leave my computer?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. The file is read by the page in your browser, and every statistic is computed there. Nothing is uploaded, and there is no server that could receive it. The only thing on this page that could ever contact anyone is the analytics tag, and it loads only after you allow it."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does the page show the arithmetic and not just the answer?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Because a statistic you cannot re-compute is a claim about trust rather than a claim about the world. Each panel prints the formula with the numbers substituted, names the convention it used where more than one exists, and prints the uncertainty beside every estimate."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Where does the data come from?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Four published datasets, each cited on the page with its original paper: Anscombe's quartet (1973), Fisher's iris (1936), the Old Faithful geyser measurements of Azzalini and Bowman (1990), and the Palmer penguins of Gorman, Williams and Fraser (2014). Each is shipped with the page as JSON and checked by the test suite against published summary values."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <div class="grid" aria-hidden="true"></div>
+
+    <header class="top">
+      <a class="brand" href="/" aria-label="measured.nodejavascript.com — home">
+        <span class="mark" aria-hidden="true">
+          <!-- The site's own mark: a scatter of points with the least-squares line through them.
+               The same drawing, in the same order, is `site/favicon.svg` — part 15c of the standard
+               requires the bar, the footer and the icon to be the same drawing. -->
+          <svg viewBox="0 0 64 64" width="26" height="26" focusable="false">
+            <rect width="64" height="64" rx="14" fill="#04120f" />
+            <line x1="12" y1="50" x2="54" y2="14" stroke="#14b8a6" stroke-width="3" stroke-linecap="round" />
+            <circle cx="15" cy="47" r="2.8" fill="#99f6e4" />
+            <circle cx="22" cy="40" r="2.8" fill="#99f6e4" />
+            <circle cx="29" cy="41" r="2.8" fill="#99f6e4" />
+            <circle cx="36" cy="30" r="2.8" fill="#99f6e4" />
+            <circle cx="34" cy="24" r="2.8" fill="#99f6e4" />
+            <circle cx="45" cy="22" r="2.8" fill="#99f6e4" />
+            <circle cx="50" cy="17" r="2.8" fill="#99f6e4" />
+            <circle cx="41" cy="39" r="2.8" fill="#14b8a6" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <b>Measured</b>
+          <small>nodejavascript.com</small>
+        </span>
+      </a>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-text">
+        <h1>A number you cannot check is an opinion.</h1>
+        <p class="lede">
+          So this page checks its own numbers in front of you. Pick a published dataset, or drop in
+          your own file, and every figure below is computed in your browser from that data — with
+          the arithmetic shown, the convention named, and the uncertainty printed beside every
+          estimate. Nothing is uploaded, because there is nowhere for it to go.
+        </p>
+        <p class="hero-actions">
+          <a class="btn primary" href="#data">Start with a dataset</a>
+          <a class="btn" href="#how">How to check a number here</a>
+        </p>
+        </div>
+
+        <!-- The page's own opening argument, drawn from the data it ships: one of Anscombe's four
+             sets, with its least-squares line. The other three share this one's statistics. -->
+        <figure class="hero-figure chart">
+          <div id="hero-plot" role="img" aria-label="Eleven points with a fitted line: Anscombe's first set"></div>
+          <figcaption>
+            Anscombe's first set, drawn from <code>site/data/anscombe.json</code>. The other three sets
+            in section 3 share its mean, its variance, its correlation and its slope — and look nothing
+            like it.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ═══ 1 · THE DATA ═══════════════════════════════════════════════════════════════ -->
+      <section id="data" class="panel">
+        <h2>1 · The data</h2>
+        <p class="sub">
+          Four published datasets are shipped with the page. Each one is here because it teaches
+          something that a summary statistic hides, and each is cited at the bottom of this page.
+        </p>
+
+        <div class="picker" id="dataset-picker" role="group" aria-label="Choose a dataset">
+          <button class="chip" type="button" data-set="anscombe">
+            Anscombe's quartet<small>4 × 11 rows</small>
+          </button>
+          <button class="chip" type="button" data-set="iris">
+            Fisher's iris<small>150 rows</small>
+          </button>
+          <button class="chip" type="button" data-set="faithful">
+            Old Faithful<small>272 rows</small>
+          </button>
+          <button class="chip" type="button" data-set="penguins">
+            Palmer penguins<small>344 rows</small>
+          </button>
+        </div>
+
+        <div class="file-row">
+          <label class="file"
+            >Or use your own comma-separated file
+            <input id="csv" type="file" accept=".csv,text/csv" />
+          </label>
+          <span class="hint" id="csv-note">A header row is required. Quoted fields are read properly.</span>
+        </div>
+
+        <div id="dataset-meta" class="meta"></div>
+        <div id="dataset-table" class="table-wrap"></div>
+      </section>
+
+      <!-- ═══ 2 · ONE COLUMN ═════════════════════════════════════════════════════════════ -->
+      <section id="summary" class="panel">
+        <h2>2 · One column, described</h2>
+        <p class="sub">
+          Every figure in the table is printed with the rule that produced it, because each of them
+          has more than one defensible definition and the difference is not always small.
+        </p>
+
+        <div class="control-row">
+          <label for="summary-col">Column</label>
+          <select id="summary-col"></select>
+        </div>
+
+        <div class="two-up">
+          <div>
+            <div id="summary-table" class="table-wrap"></div>
+            <div id="summary-arith" class="arith"></div>
+          </div>
+          <div>
+            <figure class="chart-figure">
+              <div id="hist" class="chart" role="img" aria-label="Histogram of the chosen column"></div>
+              <figcaption id="hist-caption"></figcaption>
+            </figure>
+            <figure class="chart-figure">
+              <div id="box" class="chart small" role="img" aria-label="Box plot of the chosen column"></div>
+              <figcaption id="box-caption"></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 3 · THE QUARTET ════════════════════════════════════════════════════════════ -->
+      <section id="quartet" class="panel">
+        <h2>3 · Four datasets that agree, and do not</h2>
+        <p class="sub">
+          Anscombe published these four sets in 1973 to make one point: the mean of <i>x</i>, the
+          mean of <i>y</i>, the variance, the correlation and the fitted line are the same in all
+          four, to three decimal places — and the four pictures are not the same data at all. The
+          numbers below are computed here, from the data, not copied from the paper.
+        </p>
+        <figure class="chart-figure">
+          <div id="quartet-plots" class="quartet"></div>
+          <figcaption>
+            One scatter per set, always on the same axes, with its own least-squares line. Hover a
+            point for its values.
+          </figcaption>
+        </figure>
+        <div id="quartet-table" class="table-wrap"></div>
+      </section>
+
+      <!-- ═══ 4 · A LINE, AND WHAT IT ASSUMES ════════════════════════════════════════════ -->
+      <section id="model" class="panel">
+        <h2>4 · A fitted line, with what it assumes</h2>
+        <p class="sub">
+          A slope on its own is the most over-read number in public life. Here it arrives with its
+          standard error, the p-value from the t distribution, the share of variance it explains,
+          an honest out-of-fold error, and the assumptions that have to hold — plus the leverage check —
+          before any of it means what it appears to mean.
+        </p>
+
+        <div class="control-row">
+          <label for="model-y">Outcome</label>
+          <select id="model-y"></select>
+          <label for="model-x">Predictor</label>
+          <select id="model-x"></select>
+          <span class="hint" id="model-n"></span>
+        </div>
+
+        <div class="two-up">
+          <div id="model-table" class="table-wrap"></div>
+          <figure class="chart-figure">
+            <div id="resid-plot" class="chart" role="img" aria-label="Residual plot"></div>
+            <figcaption id="resid-caption"></figcaption>
+          </figure>
+        </div>
+
+        <h3>How well does it predict something it has not seen?</h3>
+        <p class="sub tight">
+          The R² above is measured on the same rows that fitted the line, so it is always a little
+          optimistic. Cross-validation holds rows out, fits on the rest, and scores what is left —
+          twenty times over, because one split gives one number and that number moves.
+        </p>
+        <div id="cv-out"></div>
+
+        <h3>The assumptions, checked where a check is possible</h3>
+        <div id="assumption-out" class="assumptions"></div>
+      </section>
+
+      <!-- ═══ 5 · CLASSIFICATION ═════════════════════════════════════════════════════════ -->
+      <section id="classify" class="panel">
+        <h2>5 · Telling classes apart</h2>
+        <p class="sub">
+          Accuracy alone hides which mistake is being made, so the confusion matrix comes first;
+          the ROC curve comes second because it is the one summary that survives an unbalanced
+          sample. Both are computed out-of-fold, on rows the classifier never saw.
+        </p>
+
+        <div class="control-row">
+          <label for="class-target">Class column</label>
+          <select id="class-target"></select>
+          <label for="class-k"
+            >Neighbours <output id="class-k-out">5</output></label
+          >
+          <input id="class-k" type="range" min="1" max="15" step="1" value="5" />
+          <span class="hint" id="class-note"></span>
+        </div>
+
+        <div class="two-up">
+          <div>
+            <div id="cm" class="table-wrap"></div>
+            <div id="class-metrics" class="table-wrap"></div>
+          </div>
+          <div>
+            <figure class="chart-figure">
+              <div id="roc" class="chart" role="img" aria-label="ROC curve"></div>
+              <figcaption id="roc-caption"></figcaption>
+            </figure>
+            <div id="class-cv"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 6 · HOW TO CHECK A NUMBER ═════════════════════════════════════════════════ -->
+      <section id="how" class="panel">
+        <h2>6 · How to check a number here</h2>
+        <p class="sub">
+          Four things turn a figure into evidence: it can be recomputed, its convention is named,
+          its uncertainty is printed, and the sample it came from is stated. This page does all
+          four; the middle two are the ones most dashboards skip.
+        </p>
+        <ol class="steps">
+          <li>
+            <b>Recompute it.</b> Every statistic on this page comes from
+            <code>site/measured.js</code>, which has no dependency on the page and is imported by
+            the test suite as well as by the browser. The tests in
+            <code>tools/test-stats.mjs</code> compare it against values computed separately in
+            Python with <code>statistics</code> and <code>scipy</code>, and against the four-decimal
+            summary of Anscombe's quartet that every textbook prints.
+          </li>
+          <li>
+            <b>Read the convention.</b> Standard deviation uses the n − 1 denominator. Quantiles
+            use Hyndman &amp; Fan type 7, which is what R, NumPy and Excel give, so the same number
+            appears if you check it elsewhere. Skewness is the adjusted sample moment G1; kurtosis
+            is <i>excess</i> kurtosis, so a normal distribution is 0 and not 3. Correlation is
+            Pearson's unless it says Spearman, which is Pearson's on averaged ranks.
+          </li>
+          <li>
+            <b>Read the uncertainty, not the point.</b> A slope with a standard error of a third of
+            its own size is not evidence of anything, however tidy it looks. A cross-validated
+            score is printed as a mean and a spread across repeats for the same reason.
+          </li>
+          <li>
+            <b>Ask what the sample is.</b> Iris is 150 flowers measured in the 1930s; the penguins are
+            344 birds from three islands in the Palmer Archipelago; Old Faithful is 272 eruptions
+            recorded between 1985 and 1986. A conclusion reaches no further than the sample does,
+            and no statistic on any page can repair that.
+          </li>
+        </ol>
+      </section>
+
+      <!-- ═══ 7 · PRIVACY, PROVENANCE ════════════════════════════════════════════════════ -->
+      <section id="privacy" class="panel">
+        <h2>7 · What leaves this page</h2>
+        <p class="sub">Nothing, unless you say yes to the only question it asks.</p>
+        <ul class="plain">
+          <li>
+            <b>Your own file stays in your browser.</b> It is read with the browser's file API and
+            parsed in memory; there is no upload, and no endpoint that could accept one.
+          </li>
+          <li>
+            <b>No account, no sign-in, no cookies for the app itself.</b> The only cookie the site
+            can set is the analytics one, and only after you allow it — the tag is created by
+            <code>consent.js</code> rather than sitting in the document, so refusing means no
+            request to anyone is made at all.
+          </li>
+          <li>
+            <b>Faults are not reported, because there is nowhere to report them to.</b> This site
+            has no server-side endpoint: the page and its data are static files, and the only
+            network request it can make is the analytics tag above, after a yes.
+          </li>
+        </ul>
+
+        <h3>The datasets, with their papers</h3>
+        <ul class="plain cites">
+          <li>
+            <b>Anscombe's quartet</b> (1973) — F. J. Anscombe, “Graphs in Statistical Analysis”,
+            <i>The American Statistician</i> 27(1), 17–21. Four sets of eleven points; the data
+            shipped here is the version distributed with R as <code>datasets::anscombe</code>.
+          </li>
+          <li>
+            <b>Fisher's iris</b> (1936) — R. A. Fisher, “The use of multiple measurements in
+            taxonomic problems”, <i>Annals of Eugenics</i> 7(2), 179–188; data collected by Edgar
+            Anderson. 150 flowers, four measurements, three species.
+          </li>
+          <li>
+            <b>Old Faithful</b> (1990) — A. Azzalini and A. W. Bowman, “A look at some data on the
+            Old Faithful geyser”, <i>Applied Statistics</i> 39, 357–365. 272 eruptions, in minutes,
+            recorded between August 1985 and August 1986.
+          </li>
+          <li>
+            <b>Palmer penguins</b> (2014) — K. B. Gorman, T. D. Williams and W. R. Fraser,
+            “Ecological sexual dimorphism and environmental variability within a community of
+            Antarctic penguins”, <i>PLOS ONE</i> 9(3): e90081. 344 birds, three species, three
+            islands, with the missing measurements left missing.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ═══ 8 · RUN IT ═════════════════════════════════════════════════════════════════ -->
+      <section id="run" class="panel">
+        <h2>8 · Run it yourself</h2>
+        <p class="sub">
+          It is a static page and a statistics module with no dependencies. Serve the folder and
+          open it — that is the whole installation.
+        </p>
+        <pre><code>python3 tools/serve.py 8161     # http://127.0.0.1:8161
+node tools/test-stats.mjs       # the arithmetic, 89 assertions
+python3 tools/check-page.py     # the page against the family's rules</code></pre>
+        <p class="sub tight">
+          The site is served with <code>no-store</code> on purpose: a browser holding a cached copy
+          makes a correct change look like no change at all.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="mark" aria-hidden="true">
+          <!-- the same drawing as the bar above and as `site/favicon.svg` (part 15c) -->
+          <svg viewBox="0 0 64 64" width="22" height="22" focusable="false">
+            <rect width="64" height="64" rx="14" fill="#04120f" />
+            <line x1="12" y1="50" x2="54" y2="14" stroke="#14b8a6" stroke-width="3" stroke-linecap="round" />
+            <circle cx="15" cy="47" r="2.8" fill="#99f6e4" />
+            <circle cx="22" cy="40" r="2.8" fill="#99f6e4" />
+            <circle cx="29" cy="41" r="2.8" fill="#99f6e4" />
+            <circle cx="36" cy="30" r="2.8" fill="#99f6e4" />
+            <circle cx="34" cy="24" r="2.8" fill="#99f6e4" />
+            <circle cx="45" cy="22" r="2.8" fill="#99f6e4" />
+            <circle cx="50" cy="17" r="2.8" fill="#99f6e4" />
+            <circle cx="41" cy="39" r="2.8" fill="#14b8a6" />
+          </svg>
+        </span>
+        <span><b>Measured</b> · <a href="https://nodejavascript.com/">nodejavascript.com</a></span>
+      </div>
+      <p class="footer-links">
+        <a href="https://github.com/nodejavascript/measured"
+          ><svg class="gh-star" viewBox="0 0 16 16" aria-hidden="true"
+            ><path
+              d="M8 1.4l1.98 4.2 4.42.5-3.3 3.05.9 4.45L8 11.4l-4 2.2.9-4.45L1.6 6.1l4.42-.5z"
+              ></path></svg
+          >github.com/nodejavascript/measured</a
+        >
+        · <a href="https://github.com/nodejavascript/measured/blob/main/LICENSE">MIT</a> ·
+        <a href="#privacy">Privacy</a> ·
+        <button id="consentBtn" class="linkbtn" data-consent-open type="button">Cookie settings</button>
+      </p>
+      <p class="copyright">© 2026 measured.nodejavascript.com</p>
+    </footer>
+
+    <!-- 🔴 THE ANALYTICS TAG IS NOT IN THIS DOCUMENT. `consent.js` holds the measurement id and
+         creates the tag only after a yes, so a visitor who refuses makes no request to Google at
+         all. The id is set at deployment, when this site's own property exists in the `mcp`
+         account; an empty id makes the file a no-op rather than a fake measurement. -->
+    <script src="./consent.js" data-ga-id="" defer></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

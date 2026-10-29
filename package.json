@@ -1,0 +1,15 @@
+{
+  "name": "measured",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A statistics workbench in one page: real datasets, every figure computed in the browser, every estimate printed with its uncertainty.",
+  "license": "MIT",
+  "scripts": {
+    "serve": "python3 tools/serve.py 8161",
+    "test": "node tools/test-stats.mjs && node tools/test-consent.mjs && python3 tools/check-page.py",
+    "test:render": "node tools/verify-render.mjs && node tools/verify-render.mjs --selftest",
+    "test:all": "npm test && npm run test:render",
+    "icons": "python3 tools/make_icons.py"
+  }
+}
