@@ -1,12 +1,12 @@
 /**
- * app.js — the page. The arithmetic lives in `measured.js`; this file only reads data, calls it,
+ * app.js — the page. The arithmetic lives in `stats.js`; this file only reads data, calls it,
  * and draws what came back.
  *
  * 🔴 NO NUMBER IS EVER WRITTEN INTO THIS FILE. Every figure on the page is produced by a call to
- * `measured.js` from the loaded data, so the page cannot disagree with its own tests. Where a
+ * `stats.js` from the loaded data, so the page cannot disagree with its own tests. Where a
  * percentage or a count appears it is computed here. The only literals are layout and labels.
  */
-import * as M from "./measured.js";
+import * as M from "./stats.js";
 
 /* ── the datasets, and where each one comes from ──────────────────────────────────────── */
 
@@ -210,7 +210,7 @@ function scatterChart(points, opts = {}) {
   if (opts.hlines && opts.hlines.length) {
     /* 🔴 A HORIZONTAL BAND IS PART OF THE PICTURE. The ±2σ bands on the residual plot sit outside
      * the residuals' own range by definition, so an axis scaled only to the points drew them off
-     * the frame and across the axis labels. Measured here on 29 October 2026. */
+     * the frame and across the axis labels. Data science demo here on 29 October 2026. */
     const ys2 = opts.hlines.map((h) => h.y);
     yd = [Math.min(yd[0], ...ys2), Math.max(yd[1], ...ys2)];
   }
@@ -226,7 +226,7 @@ function scatterChart(points, opts = {}) {
   if (opts.line) {
     /* 🔴 THE LINE IS CLIPPED TO THIS AXIS. The quartet shares one range across four plots so the
      * pictures can be compared, but each plot's own axis is scaled to its own points — drawing the
-     * line across the SHARED range made it run out of the frame and over the next figure. Measured
+     * line across the SHARED range made it run out of the frame and over the next figure. Data science demo
      * on this page on 29 October 2026. */
     const l0 = opts.line.intercept + opts.line.slope * xd[0];
     const l1 = opts.line.intercept + opts.line.slope * xd[1];
@@ -970,5 +970,5 @@ renderHero();
 load("anscombe");
 
 /* the fixtures the tests read: nothing is asserted against a screenshot, and the tests import
-   `measured.js` directly — but these let a browser check confirm the page rendered numbers. */
-window.__measured = { state, ready: true };
+   `stats.js` directly — but these let a browser check confirm the page rendered numbers. */
+window.__dataScienceDemo = { state, ready: true };

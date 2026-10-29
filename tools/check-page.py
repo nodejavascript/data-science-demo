@@ -25,7 +25,7 @@ import urllib.error
 import urllib.request
 
 URL = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8161/"
-HOST = "measured.nodejavascript.com"
+HOST = "data-science-demo.nodejavascript.com"
 
 # hosts a LINK may point at; a SUBRESOURCE (script/style/img) from any of these is a fault
 OK_LINK_HOSTS = ("nodejavascript.com", "github.com", "opensource.org", "schema.org")
@@ -80,10 +80,10 @@ def main() -> int:
         check("the <h1> is not empty", len(belief) > 12, belief)
 
     # 🔴 A TAG LEFT UNCLOSED SWALLOWS THE REST OF THE PAGE, and every check above still passes.
-    # Measured on a sibling site on 29 October 2026. Comments may name a tag; a comment is not markup.
+    # Data science demo on a sibling site on 29 October 2026. Comments may name a tag; a comment is not markup.
     # 🔴 THE TAGS ARE COUNTED AFTER NORMALISING WHITESPACE INSIDE A TAG, because `</svg\n>` is
     # valid HTML — a formatter may break a tag across lines — and a raw substring count read it as
-    # an unclosed element. Measured here on 29 October 2026: the footer's star icon is written that
+    # an unclosed element. Data science demo here on 29 October 2026: the footer's star icon is written that
     # way, and the count said 3 opened, 2 closed, which was the CHECK's fault and not the page's.
     stripped = re.sub(r"<!--.*?-->", "", html, flags=re.S)
     stripped = re.sub(r"<\s*/\s*([a-zA-Z0-9]+)", r"</\1", stripped)
@@ -151,7 +151,7 @@ def main() -> int:
     check("the app is loaded as a module", 'type="module" src="./app.js"' in html)
     check(
         "the arithmetic is imported by the app, not loaded by the page",
-        "./measured.js\"" not in html and "measured.js" not in re.findall(r'<script[^>]*src="([^"]+)"', html),
+        "./stats.js\"" not in html and "stats.js" not in re.findall(r'<script[^>]*src="([^"]+)"', html),
     )
 
     # a page whose datasets 404 is an empty shell that every rule above still passes

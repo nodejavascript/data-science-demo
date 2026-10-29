@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>measured.nodejavascript.com</title>
+    <title>data-science-demo.nodejavascript.com</title>
     <meta
       name="description"
       content="A statistics workbench in one page: real datasets, every figure computed in front of you, every assumption named, every estimate printed with its uncertainty."
     />
-    <link rel="canonical" href="https://measured.nodejavascript.com/" />
+    <link rel="canonical" href="https://data-science-demo.nodejavascript.com/" />
     <meta name="theme-color" content="#14b8a6" />
     <meta name="color-scheme" content="dark" />
 
@@ -20,21 +20,21 @@
     <link rel="manifest" href="./manifest.webmanifest" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="measured.nodejavascript.com" />
+    <meta property="og:site_name" content="data-science-demo.nodejavascript.com" />
     <meta property="og:title" content="A number you cannot check is an opinion" />
     <meta
       property="og:description"
       content="Real datasets, real arithmetic. Every statistic on this page is computed in your browser from the data it names, and printed with the convention it used."
     />
-    <meta property="og:url" content="https://measured.nodejavascript.com/" />
-    <meta property="og:image" content="https://measured.nodejavascript.com/img/og.png" />
+    <meta property="og:url" content="https://data-science-demo.nodejavascript.com/" />
+    <meta property="og:image" content="https://data-science-demo.nodejavascript.com/img/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="A number you cannot check is an opinion" />
     <meta
       name="twitter:description"
       content="Real datasets, real arithmetic, and every estimate printed with the uncertainty it carries."
     />
-    <meta name="twitter:image" content="https://measured.nodejavascript.com/img/og.png" />
+    <meta name="twitter:image" content="https://data-science-demo.nodejavascript.com/img/og.png" />
 
     <link rel="stylesheet" href="./styles.css" />
 
@@ -44,12 +44,12 @@
         "@graph": [
           {
             "@type": "SoftwareApplication",
-            "name": "Measured",
+            "name": "Data science demo",
             "applicationCategory": "EducationalApplication",
             "operatingSystem": "Any browser",
             "description": "A statistics workbench: descriptive statistics, histograms, ordinary least squares with standard errors, repeated k-fold cross-validation, and k-nearest-neighbour classification with a confusion matrix and a ROC curve — all computed in the browser from cited datasets.",
-            "url": "https://measured.nodejavascript.com/",
-            "codeRepository": "https://github.com/nodejavascript/measured",
+            "url": "https://data-science-demo.nodejavascript.com/",
+            "codeRepository": "https://github.com/nodejavascript/data-science-demo",
             "license": "https://opensource.org/license/mit",
             "isAccessibleForFree": true,
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" }
@@ -101,7 +101,7 @@
     <div class="grid" aria-hidden="true"></div>
 
     <header class="top">
-      <a class="brand" href="/" aria-label="measured.nodejavascript.com — home">
+      <a class="brand" href="/" aria-label="data-science-demo.nodejavascript.com — home">
         <span class="mark" aria-hidden="true">
           <!-- The site's own mark: a scatter of points with the least-squares line through them.
                The same drawing, in the same order, is `site/favicon.svg` — part 15c of the standard
@@ -120,7 +120,7 @@
           </svg>
         </span>
         <span class="brand-text">
-          <b>Measured</b>
+          <b>Data science demo</b>
           <small>nodejavascript.com</small>
         </span>
       </a>
@@ -322,7 +322,7 @@
         <ol class="steps">
           <li>
             <b>Recompute it.</b> Every statistic on this page comes from
-            <code>site/measured.js</code>, which has no dependency on the page and is imported by
+            <code>site/stats.js</code>, which has no dependency on the page and is imported by
             the test suite as well as by the browser. The tests in
             <code>tools/test-stats.mjs</code> compare it against values computed separately in
             Python with <code>statistics</code> and <code>scipy</code>, and against the four-decimal
@@ -431,21 +431,21 @@ python3 tools/check-page.py     # the page against the family's rules</code></pr
             <circle cx="41" cy="39" r="2.8" fill="#14b8a6" />
           </svg>
         </span>
-        <span><b>Measured</b> · <a href="https://nodejavascript.com/">nodejavascript.com</a></span>
+        <span><b>Data science demo</b> · <a href="https://nodejavascript.com/">nodejavascript.com</a></span>
       </div>
       <p class="footer-links">
-        <a href="https://github.com/nodejavascript/measured"
+        <a href="https://github.com/nodejavascript/data-science-demo"
           ><svg class="gh-star" viewBox="0 0 16 16" aria-hidden="true"
             ><path
               d="M8 1.4l1.98 4.2 4.42.5-3.3 3.05.9 4.45L8 11.4l-4 2.2.9-4.45L1.6 6.1l4.42-.5z"
               ></path></svg
-          >github.com/nodejavascript/measured</a
+          >github.com/nodejavascript/data-science-demo</a
         >
-        · <a href="https://github.com/nodejavascript/measured/blob/main/LICENSE">MIT</a> ·
+        · <a href="https://github.com/nodejavascript/data-science-demo/blob/main/LICENSE">MIT</a> ·
         <a href="#privacy">Privacy</a> ·
         <button id="consentBtn" class="linkbtn" data-consent-open type="button">Cookie settings</button>
       </p>
-      <p class="copyright">© 2026 measured.nodejavascript.com</p>
+      <p class="copyright">© 2026 data-science-demo.nodejavascript.com</p>
     </footer>
 
     <!-- 🔴 THE ANALYTICS TAG IS NOT IN THIS DOCUMENT. `consent.js` holds the measurement id and

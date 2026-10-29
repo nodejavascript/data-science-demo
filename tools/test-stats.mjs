@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA = join(HERE, "..", "site", "data");
-const M = await import(join(HERE, "..", "site", "measured.js"));
+const M = await import(join(HERE, "..", "site", "stats.js"));
 
 let passed = 0;
 const failures = [];
@@ -36,7 +36,7 @@ function near(name, actual, expected, tol = 1e-6) {
 
 const json = (f) => JSON.parse(readFileSync(join(DATA, f), "utf8"));
 
-console.log("\nmeasured.js — the arithmetic\n");
+console.log("\nstats.js — the arithmetic\n");
 
 /* 1 · the basics, by hand: the numbers 1 to 10 */
 {

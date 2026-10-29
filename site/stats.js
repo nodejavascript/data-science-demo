@@ -1,5 +1,5 @@
 /**
- * measured.js — the arithmetic this page shows you.
+ * stats.js — the arithmetic this page shows you.
  *
  * WHY THIS FILE IS SEPARATE FROM THE PAGE. Every number the site prints comes from a function
  * in here, and this file is imported by the tests as well as by the browser. That is the whole

@@ -21,7 +21,7 @@ const check = (name, ok) => {
   if (!ok) failures++;
 };
 
-const KEY = "measured.consent";
+const KEY = "data-science-demo.consent";
 const ID = "G-TESTID123";
 
 function run(choice, query, id = ID) {

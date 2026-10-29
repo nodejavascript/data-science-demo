@@ -1,6 +1,6 @@
 {
-  "name": "Measured — statistics you can check",
-  "short_name": "Measured",
+  "name": "Data science demo — statistics you can check",
+  "short_name": "Data science demo",
   "description": "A statistics workbench: real datasets, every figure computed in the browser, every estimate printed with its uncertainty.",
   "start_url": "/",
   "display": "standalone",

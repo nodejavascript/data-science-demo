@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://measured.nodejavascript.com/sitemap.xml
+Sitemap: https://data-science-demo.nodejavascript.com/sitemap.xml

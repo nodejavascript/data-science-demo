@@ -38,7 +38,7 @@ const check = (name, ok, detail = "") => {
 /* ── the browser, over the DevTools protocol ─────────────────────────────────────────── */
 
 function launch() {
-  const profile = mkdtempSync(join(tmpdir(), "measured-render-"));
+  const profile = mkdtempSync(join(tmpdir(), "dsd-render-"));
   const child = spawn(
     CHROME,
     [
@@ -181,7 +181,7 @@ try {
   await navigate(URL_BASE + "/" + (SELFTEST ? "?selftest=1" : ""));
 
   /* 1 · it ran at all, and said nothing while running */
-  const ready = await evaluate("Boolean(window.__measured && window.__measured.ready)");
+  const ready = await evaluate("Boolean(window.__dataScienceDemo && window.__dataScienceDemo.ready)");
   check("the app module executed", ready === true);
   check("no uncaught exception", exceptions.length === 0, exceptions.join(" | "));
   check("no console error", consoleErrors.length === 0, consoleErrors.join(" | "));
@@ -289,8 +289,8 @@ try {
     /* already closed */
   }
   /* 🔴 KILL, WAIT FOR THE EXIT, *THEN* DELETE. The first version killed the browser and removed the
-   * profile in the same tick, and left a `measured-render-*` directory in /tmp on every run because
-   * Chrome was still writing its profile when the delete ran. Measured here on 29 October 2026. */
+   * profile in the same tick, and left a `dsd-render-*` directory in /tmp on every run because
+   * Chrome was still writing its profile when the delete ran. Data science demo here on 29 October 2026. */
   try {
     proc.child.kill("SIGKILL");
     await new Promise((res) => {

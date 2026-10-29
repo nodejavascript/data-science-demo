@@ -1,4 +1,4 @@
-# measured.nodejavascript.com
+# data-science-demo.nodejavascript.com
 
 **A number you cannot check is an opinion** — so this page checks its own numbers in front of you.
 Pick one of four published datasets, or drop in your own file, and every statistic is computed in
@@ -8,7 +8,7 @@ Nothing is uploaded, because there is nowhere for it to go.
 
 That belief forbids things, which is the test of whether it is a belief at all:
 
-- **no figure on this page is typed in by hand.** Every number comes from `site/measured.js`, called
+- **no figure on this page is typed in by hand.** Every number comes from `site/stats.js`, called
   with the loaded data. The page cannot disagree with its own tests, because it runs the same code.
 - **no estimate is printed without its uncertainty.** A slope without a standard error, or a
   cross-validated score without its spread across repeats, is exactly the number this page refuses
@@ -97,8 +97,8 @@ assumption is only testable on the one dataset here that records the order its r
 
 ```
 site/                      the page and the arithmetic
-  measured.js              the statistics — no DOM, no dependencies, imported by the tests
-  app.js                   the page: reads data, calls measured.js, draws what came back
+  stats.js              the statistics — no DOM, no dependencies, imported by the tests
+  app.js                   the page: reads data, calls stats.js, draws what came back
   data/                    the four datasets, as JSON
   consent.js               the cookie gate; creates the analytics tag only after a yes
 tools/                     the checks, the dev server, the icon generator

@@ -3,7 +3,7 @@
 services:
   measured:
     build: .
-    container_name: measured
+    container_name: data-science-demo
     ports:
       - "${MEASURED_PORT:-8161}:80"
     restart: unless-stopped

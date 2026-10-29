@@ -1,7 +1,7 @@
-# Measured — a static page, so the image is a web server and nothing else.
+# Data science demo — a static page, so the image is a web server and nothing else.
 #
 # There is no build step and no runtime dependency to install: the statistics run in the visitor's
-# browser out of `site/measured.js`, and the datasets are JSON files. That is deliberate — a page
+# browser out of `site/stats.js`, and the datasets are JSON files. That is deliberate — a page
 # whose arithmetic needs a server is a page whose arithmetic cannot be checked by reading it.
 FROM nginx:alpine
 

@@ -1,4 +1,4 @@
-/* The cookie gate — measured.nodejavascript.com
+/* The cookie gate — data-science-demo.nodejavascript.com
  *
  * 🔴 THE ANALYTICS TAG IS NOT IN THE DOCUMENT. This file holds the measurement id (read from its
  * own `data-ga-id`) and creates the tag only after a yes, so a visitor who refuses makes NO
@@ -19,7 +19,7 @@
 (function () {
   var me = document.currentScript || document.querySelector("script[data-ga-id]");
   var GA_ID = (me && me.getAttribute("data-ga-id")) || "";
-  var KEY = "measured.consent";
+  var KEY = "data-science-demo.consent";
   var OUT = "ga_opt_out";
   var choice = null;
 
@@ -45,8 +45,8 @@
 
   function loadTag() {
     if (!configured()) return;
-    if (window.__measuredTagLoaded) return;
-    window.__measuredTagLoaded = true;
+    if (window.__dataScienceDemoTagLoaded) return;
+    window.__dataScienceDemoTagLoaded = true;
     var s = document.createElement("script");
     s.async = true;
     s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_ID);
