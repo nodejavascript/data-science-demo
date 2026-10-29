@@ -147,6 +147,22 @@ def main() -> int:
     for need in ("site-footer", "Cookie settings", "© 2026 %s" % HOST, 'id="privacy"', "gh-star"):
         check("the page carries %s" % need, need in html)
 
+    base = URL.rstrip("/")
+
+    # ── the fault reporter (part 18) ─────────────────────────────────────────────────────────
+    check("the fault reporter is loaded, deferred", 'src="/rollbar.js" defer' in html)
+    check("no Rollbar credential is in the page", "data-token" not in html)
+    check("the page never talks to Rollbar directly", "api.rollbar.com" not in html)
+    try:
+        st, js = get(base + "/rollbar.js")
+        check("/rollbar.js answers 200", st == 200)
+        check("…and it posts to this site's own origin", "/api/fault" in js)
+        check("…and the query string is dropped before it leaves", "location.search" not in js)
+        check("…and it honours Do Not Track", "doNotTrack" in js)
+        check("…and it stops after five reports on one page", "MAX_PER_PAGE" in js)
+    except urllib.error.HTTPError as exc:
+        check("/rollbar.js answers 200", False, "HTTP %s" % exc.code)
+
     # ── this app's own half ────────────────────────────────────────────────────────────────────
     check("the app is loaded as a module", 'type="module" src="./app.js"' in html)
     check(
@@ -155,7 +171,6 @@ def main() -> int:
     )
 
     # a page whose datasets 404 is an empty shell that every rule above still passes
-    base = URL.rstrip("/")
     for path, rows in (
         ("/data/anscombe.json", 11),
         ("/data/iris.json", 150),

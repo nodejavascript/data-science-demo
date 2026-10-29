@@ -365,9 +365,13 @@
             request to anyone is made at all.
           </li>
           <li>
-            <b>Faults are not reported, because there is nowhere to report them to.</b> This site
-            has no server-side endpoint: the page and its data are static files, and the only
-            network request it can make is the analytics tag above, after a yes.
+            <b>If the page breaks in your browser, that one fact is reported.</b> A short
+            description of the breakage — the message, the file, the line, the stack, and the page
+            path without the query string — goes to this site's own origin, where the
+            <code>record-fault</code> Worker relays it. It sets no cookie, keeps nothing, is silent
+            when your browser asks not to be tracked, and stops after five reports on one page. It
+            is declared in the cookie panel as required rather than offered as a switch, because a
+            switch that did nothing would be a fake choice.
           </li>
         </ul>
 
@@ -453,6 +457,15 @@ python3 tools/check-page.py     # the page against the family's rules</code></pr
          all. The id is set at deployment, when this site's own property exists in the `mcp`
          account; an empty id makes the file a no-op rather than a fake measurement. -->
     <script src="./consent.js" data-ga-id="" defer></script>
+    <!-- 🔴 THE FAULT REPORTER, AND IT IS NOT A CHOICE. When this page breaks in somebody's browser
+         it says so — otherwise the page is broken for that reader, nothing says anything, and
+         nobody can fix it. It sets no cookie, keeps nothing, drops the query string, and is silent
+         under Do Not Track. It posts to this site's OWN origin (`/api/fault`), where the
+         `record-fault` Worker relays it with a server token — no credential is ever in a page.
+         Part 18 of the site standard. This site is STATIC, so it has no server half: there is no
+         process here that could hold a secret, and that is the correct answer rather than an
+         omission. -->
+    <script src="/rollbar.js" defer></script>
     <script type="module" src="./app.js"></script>
   </body>
 </html>

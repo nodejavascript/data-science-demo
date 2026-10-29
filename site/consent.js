@@ -121,8 +121,10 @@
       '<button type="button" class="consentClose" aria-label="Close" data-close>&times;</button></div>' +
       '<ul class="consentList">' +
       '<li class="consentRow"><div><p class="consentRowName">Strictly necessary</p>' +
-      '<p class="consentRowWhy">The page itself, and the choice you make here. Nothing else is ' +
-      'stored for the app to work, so there is nothing to switch off.</p></div>' +
+      '<p class="consentRowWhy">The page itself, the choice you make here, and — if the page breaks ' +
+      'on your device — a report of the error, to this site\'s own origin, so a breakage can be found ' +
+      'instead of staying invisible for ever. It sets no cookie and keeps nothing, so there is ' +
+      'nothing to switch off.</p></div>' +
       '<span class="consentAlways">Always on</span></li>' +
       '<li class="consentRow"><div><p class="consentRowName">Analytics</p>' +
       '<p class="consentRowWhy">Google Analytics, to count visits.' +
