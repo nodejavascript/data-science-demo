@@ -6,16 +6,16 @@
  */
 
 :root {
-  --ink: #e8f5f2;
-  --ink-2: #a8c4bf;
-  --ink-3: #6d8b87;
-  --accent: #14b8a6;
-  --accent-soft: #99f6e4;
-  --line: #16302c;
-  --line-2: #1f4340;
-  --ground: #04120f;
-  --panel: #071a16;
-  --panel-2: #0a2420;
+  --ink: #f7eef9;
+  --ink-2: #c9aed1;
+  --ink-3: #8f7395;
+  --accent: #d946ef;
+  --accent-soft: #f5d0fe;
+  --line: #301433;
+  --line-2: #46184d;
+  --ground: #110413;
+  --panel: #1a0720;
+  --panel-2: #230a2b;
   --warn: #fbbf24;
   --bad: #f87171;
   --radius: 14px;
@@ -49,8 +49,8 @@ body {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(20, 184, 166, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(20, 184, 166, 0.07) 1px, transparent 1px);
+    linear-gradient(to right, rgba(217, 70, 239, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 70, 239, 0.07) 1px, transparent 1px);
   background-size: 32px 32px;
   -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, transparent 78%);
   mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, transparent 78%);
@@ -70,7 +70,7 @@ a:hover {
   left: -9999px;
   top: 0;
   background: var(--accent);
-  color: #04120f;
+  color: #110413;
   padding: 0.6rem 1rem;
   border-radius: 0 0 8px 0;
   font-weight: 700;
@@ -90,7 +90,7 @@ a:hover {
   align-items: center;
   gap: 0.75rem;
   padding: 0.7rem clamp(1rem, 4vw, 2.5rem);
-  background: rgba(4, 18, 15, 0.82);
+  background: rgba(17, 4, 19, 0.82);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -155,7 +155,7 @@ main {
   padding: 0.9rem 0.9rem 0.6rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(7, 26, 22, 0.6);
+  background: rgba(26, 7, 32, 0.6);
 }
 .hero-figure figcaption {
   margin-top: 0.35rem;
@@ -205,7 +205,7 @@ h1 {
 .btn.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #04120f;
+  color: #110413;
 }
 .btn.primary:hover {
   background: var(--accent-soft);
@@ -218,7 +218,7 @@ h1 {
   position: relative;
   margin: 0 0 clamp(2rem, 4vw, 3rem);
   padding: clamp(1.2rem, 2.6vw, 2rem);
-  background: linear-gradient(180deg, rgba(10, 36, 32, 0.72), rgba(7, 26, 22, 0.72));
+  background: linear-gradient(180deg, rgba(35, 10, 43, 0.72), rgba(26, 7, 32, 0.72));
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
@@ -283,7 +283,7 @@ h3 {
 }
 .chip[aria-pressed="true"] {
   border-color: var(--accent);
-  background: rgba(20, 184, 166, 0.14);
+  background: rgba(217, 70, 239, 0.14);
 }
 .chip[aria-pressed="true"] small {
   color: var(--accent-soft);
@@ -330,7 +330,7 @@ h3 {
   padding: 0.7rem 0.9rem;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: rgba(4, 18, 15, 0.5);
+  background: rgba(17, 4, 19, 0.5);
 }
 .control-row label {
   font-size: 0.84rem;
@@ -385,7 +385,7 @@ output {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: rgba(4, 18, 15, 0.42);
+  background: rgba(17, 4, 19, 0.42);
 }
 
 table {
@@ -415,7 +415,7 @@ tbody tr:last-child td {
   border-bottom: 0;
 }
 tbody tr:hover td {
-  background: rgba(20, 184, 166, 0.06);
+  background: rgba(217, 70, 239, 0.06);
 }
 td.num {
   font-family: var(--mono);
@@ -459,7 +459,7 @@ tr.total td,
 tr.total th {
   font-weight: 700;
   color: var(--ink);
-  background: rgba(20, 184, 166, 0.07);
+  background: rgba(217, 70, 239, 0.07);
 }
 
 /* ── the arithmetic block ───────────────────────────────────────────────────────────────── */
@@ -468,7 +468,7 @@ tr.total th {
   margin-top: 0.9rem;
   padding: 0.85rem 1rem;
   border-left: 2px solid var(--accent);
-  background: rgba(20, 184, 166, 0.06);
+  background: rgba(217, 70, 239, 0.06);
   border-radius: 0 8px 8px 0;
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -512,7 +512,7 @@ figcaption {
   stroke-width: 1;
 }
 .chart .bar {
-  fill: rgba(20, 184, 166, 0.55);
+  fill: rgba(217, 70, 239, 0.55);
   stroke: var(--accent);
   stroke-width: 1;
 }
@@ -537,7 +537,7 @@ figcaption {
   stroke: var(--ink-3);
 }
 .chart .box {
-  fill: rgba(20, 184, 166, 0.18);
+  fill: rgba(217, 70, 239, 0.18);
   stroke: var(--accent);
   stroke-width: 1.4;
 }
@@ -636,7 +636,7 @@ figcaption {
   border: 1px solid var(--line);
   border-left-width: 2px;
   border-radius: 0 8px 8px 0;
-  background: rgba(4, 18, 15, 0.42);
+  background: rgba(17, 4, 19, 0.42);
 }
 .assumption h4 {
   margin: 0 0 0.25rem;
@@ -717,7 +717,7 @@ figcaption {
 code {
   font-family: var(--mono);
   font-size: 0.86em;
-  background: rgba(20, 184, 166, 0.1);
+  background: rgba(217, 70, 239, 0.1);
   padding: 0.08em 0.32em;
   border-radius: 4px;
   color: var(--accent-soft);
@@ -726,7 +726,7 @@ code {
 pre {
   margin: 0 0 0.9rem;
   padding: 0.9rem 1rem;
-  background: #020a08;
+  background: #0d0310;
   border: 1px solid var(--line);
   border-radius: 10px;
   overflow-x: auto;
@@ -781,7 +781,7 @@ pre code {
   gap: 0.7rem;
   font-size: 0.86rem;
   color: var(--ink-3);
-  background: rgba(4, 18, 15, 0.7);
+  background: rgba(17, 4, 19, 0.7);
 }
 .footer-brand {
   display: flex;
@@ -893,7 +893,7 @@ pre code {
 .consentActions button.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #04120f;
+  color: #110413;
 }
 .consentActions button:hover {
   border-color: var(--accent);
@@ -963,13 +963,13 @@ pre code {
   height: 24px;
   border-radius: 999px;
   border: 1px solid var(--line-2);
-  background: #04120f;
+  background: #110413;
   cursor: pointer;
   position: relative;
   padding: 0;
 }
 .consentSwitch[aria-checked="true"] {
-  background: rgba(20, 184, 166, 0.35);
+  background: rgba(217, 70, 239, 0.35);
   border-color: var(--accent);
 }
 .consentDot {

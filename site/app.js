@@ -809,7 +809,7 @@ function renderClassify() {
   g.append(s("text", { class: "label", x: (pad.l + w - pad.r) / 2, y: h - 6, "text-anchor": "middle" }, document.createTextNode("false positive rate")));
   g.append(s("text", { class: "label", x: 12, y: pad.t + 30, "text-anchor": "middle", transform: `rotate(-90 12 ${pad.t + 30})` }, document.createTextNode("true positive rate")));
 
-  const colours = ["#14b8a6", "#99f6e4", "#fbbf24", "#f87171", "#c084fc"];
+  const colours = ["#d946ef", "#f5d0fe", "#fbbf24", "#4ade80", "#38bdf8"];
   labels.forEach((label, li) => {
     const isPos = y.map((v) => v === label);
     const pts = M.rocCurve(scoreByClass.get(label), isPos);

@@ -4,8 +4,8 @@
   "description": "A statistics workbench: real datasets, every figure computed in the browser, every estimate printed with its uncertainty.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#04120f",
-  "theme_color": "#14b8a6",
+  "background_color": "#110413",
+  "theme_color": "#d946ef",
   "icons": [
     { "src": "/favicon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }

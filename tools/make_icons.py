@@ -28,9 +28,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(os.path.dirname(HERE), "site")
 IMG = os.path.join(ROOT, "img")
 
-BG = (4, 18, 15)
-TEAL = (20, 184, 166)
-PALE = (153, 246, 228)
+BG = (17, 4, 19)
+ACCENT = (217, 70, 239)
+PALE = (245, 208, 254)
 INK = (232, 245, 242)
 
 # the line, in the 64-unit grid the SVG uses
@@ -49,12 +49,12 @@ def draw(size: int, *, keep: int = 8, point_r: float = 2.8, line_w: float = 3.0,
     def xy(p):
         return (p[0] * k, p[1] * k)
 
-    d.line([xy(LINE[0]), xy(LINE[1])], fill=TEAL, width=max(1, round(line_w * k)))
+    d.line([xy(LINE[0]), xy(LINE[1])], fill=ACCENT, width=max(1, round(line_w * k)))
     for i, p in enumerate(POINTS[:keep]):
         r = point_r * k
         cx, cy = xy(p)
         # the last point is the one the line does not quite pass through; it carries the accent
-        fill = TEAL if i == len(POINTS[:keep]) - 1 else PALE
+        fill = ACCENT if i == len(POINTS[:keep]) - 1 else PALE
         d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=fill)
 
     img = img.resize((size, size), Image.LANCZOS)
@@ -79,16 +79,16 @@ def rounded(size: int) -> Image.Image:
 
 
 SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A scatter of points with a fitted line">
-  <rect width="64" height="64" rx="14" fill="#04120f"/>
-  <line x1="12" y1="50" x2="54" y2="14" stroke="#14b8a6" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="15" cy="47" r="2.8" fill="#99f6e4"/>
-  <circle cx="22" cy="40" r="2.8" fill="#99f6e4"/>
-  <circle cx="29" cy="41" r="2.8" fill="#99f6e4"/>
-  <circle cx="36" cy="30" r="2.8" fill="#99f6e4"/>
-  <circle cx="34" cy="24" r="2.8" fill="#99f6e4"/>
-  <circle cx="45" cy="22" r="2.8" fill="#99f6e4"/>
-  <circle cx="50" cy="17" r="2.8" fill="#99f6e4"/>
-  <circle cx="41" cy="39" r="2.8" fill="#14b8a6"/>
+  <rect width="64" height="64" rx="14" fill="#110413"/>
+  <line x1="12" y1="50" x2="54" y2="14" stroke="#d946ef" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="15" cy="47" r="2.8" fill="#f5d0fe"/>
+  <circle cx="22" cy="40" r="2.8" fill="#f5d0fe"/>
+  <circle cx="29" cy="41" r="2.8" fill="#f5d0fe"/>
+  <circle cx="36" cy="30" r="2.8" fill="#f5d0fe"/>
+  <circle cx="34" cy="24" r="2.8" fill="#f5d0fe"/>
+  <circle cx="45" cy="22" r="2.8" fill="#f5d0fe"/>
+  <circle cx="50" cy="17" r="2.8" fill="#f5d0fe"/>
+  <circle cx="41" cy="39" r="2.8" fill="#d946ef"/>
 </svg>
 """
 
@@ -114,7 +114,7 @@ def social_card() -> Image.Image:
         pass
 
     # the line the page draws, redrawn large across the card
-    d.line([(700, 470), (1130, 200)], fill=TEAL, width=10)
+    d.line([(700, 470), (1130, 200)], fill=ACCENT, width=10)
     for p in [(740, 440), (800, 380), (860, 400), (920, 300), (990, 330), (1050, 240), (1090, 210)]:
         d.ellipse([p[0] - 11, p[1] - 11, p[0] + 11, p[1] + 11], fill=PALE)
 
@@ -122,7 +122,7 @@ def social_card() -> Image.Image:
     # shape is unmistakably this site's
     y = 330
     for i, width in enumerate([420, 470, 380]):
-        d.rounded_rectangle([80, y, 80 + width, y + 26], radius=13, fill=INK if i < 2 else TEAL)
+        d.rounded_rectangle([80, y, 80 + width, y + 26], radius=13, fill=INK if i < 2 else ACCENT)
         y += 46
     d.rounded_rectangle([80, y + 10, 80 + 300, y + 32], radius=11, fill=(90, 130, 125))
     return img
