@@ -288,13 +288,24 @@ try {
   } catch {
     /* already closed */
   }
+  /* 🔴 KILL, WAIT FOR THE EXIT, *THEN* DELETE. The first version killed the browser and removed the
+   * profile in the same tick, and left a `measured-render-*` directory in /tmp on every run because
+   * Chrome was still writing its profile when the delete ran. Measured here on 29 October 2026. */
   try {
     proc.child.kill("SIGKILL");
+    await new Promise((res) => {
+      if (proc.child.exitCode !== null) return res();
+      const t = setTimeout(res, 2000);
+      proc.child.once("exit", () => {
+        clearTimeout(t);
+        res();
+      });
+    });
   } catch {
     /* already dead */
   }
   try {
-    rmSync(proc.profile, { recursive: true, force: true });
+    rmSync(proc.profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   } catch {
     /* a temp directory that will not delete is not a test failure */
   }
